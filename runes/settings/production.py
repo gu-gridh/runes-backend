@@ -4,18 +4,17 @@ import os
 DEBUG = False
 ENABLE_DEBUG_TOOLBAR = False
 
-MEDIA_ROOT = os.getenv("MEDIA_ROOT", os.path.join(BASE_DIR, "media"))
-MEDIA_URL = os.getenv("MEDIA_URL", "/media/")
-STATIC_ROOT = os.getenv("STATIC_ROOT", os.path.join(BASE_DIR, "static"))
-STATIC_URL = os.getenv("STATIC_URL", "/static/")
-
 # ManifestStaticFilesStorage is recommended in production, to prevent
 # outdated JavaScript / CSS assets being served from cache.
 # See https://docs.djangoproject.com/en/5.2/ref/contrib/staticfiles/#manifeststaticfilesstorage
-if "STORAGES" not in globals():
-	STORAGES = {}
-STORAGES.setdefault("staticfiles", {})
-STORAGES["staticfiles"]["BACKEND"] = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+    },
+}
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED').split(',')
