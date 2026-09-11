@@ -1,4 +1,4 @@
-from runes_viewer.views import MetadataViewSet, VennViewSet
+from .views import MetadataViewSet, VennViewSet
 
 
 def register_routes(router):

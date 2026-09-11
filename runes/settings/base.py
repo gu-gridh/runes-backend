@@ -63,7 +63,7 @@ ADDONS = [
     'rangefilter', 
     'admin_interface',
     'colorfield',
-    'runes_viewer',
+    'apps.runes_viewer',
     'gridh_abstract',
     'digicure_viewer',
     'debug_toolbar',

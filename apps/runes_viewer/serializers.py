@@ -1,7 +1,7 @@
 from gridh_abstract.models import DEFAULT_FIELDS, get_fields
 from gridh_abstract.serializers import DynamicDepthSerializer
 
-from runes_viewer.models import Runestone
+from .models import Runestone
 
 
 class RunestoneSerializer(DynamicDepthSerializer):

@@ -14,7 +14,7 @@ from django.urls import include, path
 from django.utils.translation import gettext_lazy as _
 from rest_framework import routers
 
-from runes_viewer.urls import register_routes as register_runes_routes
+from apps.runes_viewer.urls import register_routes as register_runes_routes
 
 # Configure admin site
 admin.site.index_title = _('admin.site.index_title')

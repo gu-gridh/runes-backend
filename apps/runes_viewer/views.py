@@ -1,7 +1,7 @@
 from gridh_abstract.views import DynamicDepthViewSet
 
-from runes_viewer.models import Runestone
-from runes_viewer.serializers import RunestoneSerializer
+from .models import Runestone
+from .serializers import RunestoneSerializer
 
 
 class MetadataViewSet(DynamicDepthViewSet):
