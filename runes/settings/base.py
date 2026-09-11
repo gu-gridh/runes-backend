@@ -193,18 +193,13 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'runes.abstract.schemas.GenericSchema',
     'DEFAULT_PARSER_CLASSES': [
         'rest_framework.parsers.JSONParser',
-        'rest_framework_xml.parsers.XMLParser',
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-        'rest_framework_xml.renderers.XMLRenderer',
     ],
 
 }
-
-# Email settings
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
 # preview paths
 PREVIEW_PATH = "runes/previewimages"
