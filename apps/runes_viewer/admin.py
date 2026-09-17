@@ -20,9 +20,18 @@ class AreaAdmin(admin.ModelAdmin):
     search_fields = ('text',)
 
 @admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
+class PlaceAdmin(gis_admin.GISModelAdmin):
     list_display = ('name', 'parish', 'area__text')
     search_fields = ('name', 'parish')
+
+    gis_widget_kwargs = {
+        "attrs": {
+            "display_raw": True,
+            "default_lat": 57.7089,
+            "default_lon": 11.9746,
+            "default_zoom": 10,
+        },
+    }
 
 @admin.register(Runestone)
 class RunestoneAdmin(gis_admin.GISModelAdmin):
@@ -31,7 +40,7 @@ class RunestoneAdmin(gis_admin.GISModelAdmin):
 
     fieldsets = (
         (None,
-         {"fields": ["name", "description", "position", "time_period", "place", "location"]}),
+         {"fields": ["name", "description", "position", "time_period", "place", "coordinates"]}),
         ("External Links",
          {"fields": ["fornsoek_url", "lantmaeteriet_url"]}),
         ("Media",

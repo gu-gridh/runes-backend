@@ -50,7 +50,7 @@ class Runestone(AbstractBaseModel):
                                    help_text=("Descriptive text about the runestone surroundings"))
     position = models.ManyToManyField(Position, blank=True,
                                       help_text=_("Position"))
-    # location = models.PointField(blank=True, null=True, help_text="Coordinates of current location")
+    coordinates = models.PointField(blank=True, null=True, help_text="Coordinates of current location")
     time_period = models.ForeignKey(TimePeriod, on_delete=models.SET_NULL, blank=True, null=True, help_text=_("Dating of runestone"))    
     place = models.ForeignKey(Place, on_delete=models.SET_NULL, blank=True, null=True, related_name="runestones")
     
