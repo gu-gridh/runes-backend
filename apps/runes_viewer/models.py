@@ -53,6 +53,7 @@ class Runestone(AbstractBaseModel):
     coordinates = models.PointField(blank=True, null=True, help_text="Coordinates of current location")
     time_period = models.ForeignKey(TimePeriod, on_delete=models.SET_NULL, blank=True, null=True, help_text=_("Dating of runestone"))    
     place = models.ForeignKey(Place, on_delete=models.SET_NULL, blank=True, null=True, related_name="runestones")
+    date_visit = models.DateField(blank=True, null=True)
     
     fornsoek_url = models.URLField(blank=True, null=True)
     lantmaeteriet_url = models.URLField(blank=True, null=True)

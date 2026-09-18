@@ -8,4 +8,4 @@ class RunestoneSerializer(DynamicDepthSerializer):
 
     class Meta:
         model = Runestone
-        fields = ['id']+get_fields(Runestone, exclude=DEFAULT_FIELDS + ['location'])
+        fields = ['id']+get_fields(Runestone, exclude=DEFAULT_FIELDS + ['coordinates', 'image'])
