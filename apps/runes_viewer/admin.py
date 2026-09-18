@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.gis import admin as gis_admin
+from django.forms.models import BaseInlineFormSet
 
 from .models import Area, Place, Position, Runestone, RunestonePosition, TimePeriod
 
@@ -19,9 +20,29 @@ class AreaAdmin(admin.ModelAdmin):
     list_display = ('text',)
     search_fields = ('text',)
 
+
+class RunestonePositionFormSet(BaseInlineFormSet):
+    # choose all possible positions and populate with NO
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance.pk is None:
+            positions = Position.objects.all()
+
+            self.initial = [
+                {
+                    "position": position,
+                    "status": RunestonePosition.Status.NO,
+                }
+                for position in positions
+            ]
+
+
 class RunestonePositionInline(admin.TabularInline):
     model = RunestonePosition
-    extra = 0
+    formset = RunestonePositionFormSet
+    extra = 5
+
 
 @admin.register(Place)
 class PlaceAdmin(gis_admin.GISModelAdmin):
