@@ -39,7 +39,7 @@ class Place(AbstractPlaceModel):
     class Meta:
         verbose_name = _("Place")
         verbose_name_plural = _("Places")
-    
+
     def __str__(self) -> str:
         return f"{self.name}"
 
@@ -55,12 +55,19 @@ class Runestone(AbstractBaseModel):
     time_period = models.ForeignKey(TimePeriod, on_delete=models.SET_NULL, blank=True, null=True, help_text=_("Dating of runestone"))    
     place = models.ForeignKey(Place, on_delete=models.SET_NULL, blank=True, null=True, related_name="runestones")
     date_visit = models.DateField(blank=True, null=True)
-    
+
     fornsoek_url = models.URLField(blank=True, null=True)
     lantmaeteriet_url = models.URLField(blank=True, null=True)
 
     image = models.ImageField(blank=True, null=True,
-                              storage=IIIFFileStorage, upload_to=get_iiif_path, verbose_name=_("iiif image"), validators=[validate_image_file_extension])
+                              storage=IIIFFileStorage, upload_to=get_iiif_path,
+                              verbose_name=_("iiif image"),
+                              validators=[validate_image_file_extension])
+    mesh_url_public = models.CharField(max_length=1024, blank=True, null=True,
+                                       verbose_name=_("URL for 3D API call"))
+    mesh_url_download = models.CharField(max_length=1024, blank=True,
+                                         null=True,
+                                         verbose_name=_("URL for 3D download"))
 
     class Meta:
         verbose_name = _("Runestone")

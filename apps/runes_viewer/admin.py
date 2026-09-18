@@ -41,7 +41,12 @@ class RunestonePositionFormSet(BaseInlineFormSet):
 class RunestonePositionInline(admin.TabularInline):
     model = RunestonePosition
     formset = RunestonePositionFormSet
-    extra = 5
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 5
+
+        return 0
 
 
 @admin.register(Place)
