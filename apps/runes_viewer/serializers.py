@@ -2,14 +2,40 @@ from gridh_abstract.models import DEFAULT_FIELDS, get_fields
 from gridh_abstract.serializers import DynamicDepthSerializer
 from rest_framework import serializers
 
-from .models import Runestone, RunestonePosition
+from .models import Position, Runestone, RunestonePosition, TimePeriod
+
+
+class TimePeriodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TimePeriod
+        fields = ('id', 'text')
+
+
+class PositionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Position
+        fields = ('id', 'text')
+
+
+class RunestonePositionSerializer(serializers.ModelSerializer):
+    position = PositionSerializer()
+
+    class Meta:
+        model = RunestonePosition
+        fields = ["position", "status"]
 
 
 class RunestoneSerializer(DynamicDepthSerializer):
+    time_period = TimePeriodSerializer()
+    positions = RunestonePositionSerializer(
+        source="runestoneposition_set",
+        many=True,
+        read_only=True,
+    )
 
     class Meta:
         model = Runestone
-        fields = ['id']+get_fields(Runestone, exclude=DEFAULT_FIELDS + ['coordinates', 'image'])
+        fields = ['id', 'positions']+get_fields(Runestone, exclude=DEFAULT_FIELDS + ['coordinates', 'image', 'position'])
 
 
 class VennSerializer(serializers.ModelSerializer):
