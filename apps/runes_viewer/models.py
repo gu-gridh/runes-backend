@@ -48,8 +48,9 @@ class Runestone(AbstractBaseModel):
     name = models.CharField(max_length=256, blank=True, null=True)
     description = models.TextField(blank=True, null=True,
                                    help_text=("Descriptive text about the runestone surroundings"))
-    position = models.ManyToManyField(Position, blank=True,
-                                      help_text=_("Position"))
+    position = models.ManyToManyField(Position, through="RunestonePosition",
+                                      related_name="runestones",
+                                      blank=True, help_text=_("Position"))
     coordinates = models.PointField(blank=True, null=True, help_text="Coordinates of current location")
     time_period = models.ForeignKey(TimePeriod, on_delete=models.SET_NULL, blank=True, null=True, help_text=_("Dating of runestone"))    
     place = models.ForeignKey(Place, on_delete=models.SET_NULL, blank=True, null=True, related_name="runestones")
@@ -67,3 +68,34 @@ class Runestone(AbstractBaseModel):
 
     def __str__(self) -> str:
         return f"{self.name}"
+
+
+class RunestonePosition(models.Model):
+    class Status(models.TextChoices):
+        YES = "ja", "Ja"
+        UNCLEAR = "oklart", "Oklart"
+        MAYBE = "möjligen", "Möjligen"
+        NO = "nej", "Nej"
+
+    runestone = models.ForeignKey(
+        Runestone,
+        on_delete=models.CASCADE,
+    )
+    position = models.ForeignKey(
+        Position,
+        on_delete=models.CASCADE,
+    )
+
+    status = models.CharField(
+        max_length=10,
+        choices=Status.choices,
+        default=Status.YES,
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["runestone", "position"],
+                name="unique_runestone_position",
+            )
+        ]

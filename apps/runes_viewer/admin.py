@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.gis import admin as gis_admin
 
-from .models import Area, Place, Position, Runestone, TimePeriod
+from .models import Area, Place, Position, Runestone, RunestonePosition, TimePeriod
 
 
 @admin.register(TimePeriod)
@@ -19,6 +19,10 @@ class AreaAdmin(admin.ModelAdmin):
     list_display = ('text',)
     search_fields = ('text',)
 
+class RunestonePositionInline(admin.TabularInline):
+    model = RunestonePosition
+    extra = 0
+
 @admin.register(Place)
 class PlaceAdmin(gis_admin.GISModelAdmin):
     list_display = ('name', 'parish', 'area__text')
@@ -35,12 +39,13 @@ class PlaceAdmin(gis_admin.GISModelAdmin):
 
 @admin.register(Runestone)
 class RunestoneAdmin(gis_admin.GISModelAdmin):
-    list_display = ('name', 'position__text', 'time_period__text', 'place__name')
+    list_display = ('name', 'time_period__text', 'place__name')
     search_fields = ('name', 'place__name')
+    inlines = (RunestonePositionInline,)
 
     fieldsets = (
         (None,
-         {"fields": ["name", "description", "position", "time_period", "place", "coordinates"]}),
+         {"fields": ["name", "description", "time_period", "place", "coordinates"]}),
         ("External Links",
          {"fields": ["fornsoek_url", "lantmaeteriet_url"]}),
         ("Media",
@@ -55,3 +60,4 @@ class RunestoneAdmin(gis_admin.GISModelAdmin):
             "default_zoom": 10,
         },
     }
+
