@@ -75,7 +75,7 @@ class RunestoneAdmin(gis_admin.GISModelAdmin):
         ("External Links",
          {"fields": ["fornsoek_url", "lantmaeteriet_url"]}),
         ("Media",
-         {"fields": ["image",]}),
+         {"fields": ["image", "mesh_url_public", "mesh_url_download"]}),
     )
 
     gis_widget_kwargs = {
