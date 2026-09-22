@@ -66,10 +66,6 @@ class Runestone(AbstractBaseModel):
     fornsoek_url = models.URLField(blank=True, null=True)
     lantmaeteriet_url = models.URLField(blank=True, null=True)
 
-    image = models.ImageField(blank=True, null=True,
-                              storage=IIIFFileStorage, upload_to=get_iiif_path,
-                              verbose_name=_("iiif image"),
-                              validators=[validate_image_file_extension])
     mesh_url_public = models.CharField(max_length=1024, blank=True, null=True,
                                        verbose_name=_("URL for 3D API call"))
     mesh_url_download = models.CharField(max_length=1024, blank=True,

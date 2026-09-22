@@ -23,7 +23,7 @@ admin.site.site_title = _('admin.site.site_title')
 
 # Create main router
 router = routers.DefaultRouter()
-register_digicure_routes(router, ['panorama'])
+register_digicure_routes(router, ['image', 'panorama'])
 register_runes_routes(router)
 
 # Basic URL patterns

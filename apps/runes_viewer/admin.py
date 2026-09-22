@@ -9,7 +9,6 @@ from .models import (
     Runestone,
     RunestonePosition,
     TimePeriod,
-    TypeOfImage,
 )
 
 
@@ -27,12 +26,6 @@ class PositionAdmin(admin.ModelAdmin):
 
 @admin.register(Area)
 class AreaAdmin(admin.ModelAdmin):
-    list_display = ('text',)
-    search_fields = ('text',)
-
-
-@admin.register(TypeOfImage)
-class TypeOfImageAdmin(admin.ModelAdmin):
     list_display = ('text',)
     search_fields = ('text',)
 
@@ -92,7 +85,7 @@ class RunestoneAdmin(gis_admin.GISModelAdmin):
         ("External Links",
          {"fields": ["fornsoek_url", "lantmaeteriet_url"]}),
         ("Media",
-         {"fields": ["image", "mesh_url_public", "mesh_url_download"]}),
+         {"fields": ["mesh_url_public", "mesh_url_download"]}),
     )
 
     gis_widget_kwargs = {
