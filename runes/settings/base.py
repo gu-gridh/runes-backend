@@ -60,7 +60,7 @@ ADDONS = [
     'corsheaders',
     'drf_generators',
     'admin_auto_filters',
-    'rangefilter', 
+    'rangefilter',
     'admin_interface',
     'colorfield',
     'apps.runes_viewer',
@@ -200,4 +200,4 @@ REST_FRAMEWORK = {
 PREVIEW_PATH = "runes/previewimages"
 
 # place model in digicure
-DIGICURE_PLACE_MODEL = "runes_viewer.Place"
+DIGICURE_PLACE_MODEL = "runes_viewer.Runestone"

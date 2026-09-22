@@ -41,3 +41,4 @@ DATABASES = {
 }
 
 IIIF_URL = "https://img.dh.gu.se/runes/static/"
+ORIGINAL_URL  = "https://data.dh.gu.se/runes/upload/"

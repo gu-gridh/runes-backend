@@ -34,7 +34,7 @@ urlpatterns = [
 # Add i18n patterns
 urlpatterns += i18n_patterns(
     path('', include(router.urls)),
-    path('admin/', admin.site.urls), 
+    path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     prefix_default_language=False
 )

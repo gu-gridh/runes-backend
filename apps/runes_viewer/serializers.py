@@ -1,5 +1,6 @@
 from gridh_abstract.models import DEFAULT_FIELDS, get_fields
 from gridh_abstract.serializers import DynamicDepthSerializer
+from rest_framework_gis.serializers import GeoModelSerializer
 from rest_framework import serializers
 
 from .models import Position, Runestone, RunestonePosition, TimePeriod
@@ -32,10 +33,18 @@ class RunestoneSerializer(DynamicDepthSerializer):
         many=True,
         read_only=True,
     )
+    longitude = serializers.SerializerMethodField()
+    latitude = serializers.SerializerMethodField()
+
+    def get_longitude(self, obj):
+        return obj.coordinates.x if obj.coordinates else None
+
+    def get_latitude(self, obj):
+        return obj.coordinates.y if obj.coordinates else None
 
     class Meta:
         model = Runestone
-        fields = ['id', 'positions']+get_fields(Runestone, exclude=DEFAULT_FIELDS + ['coordinates', 'image', 'position'])
+        fields = ['id', 'positions', 'longitude', 'latitude']+get_fields(Runestone, exclude=DEFAULT_FIELDS + ['image', 'position'])
 
 
 class VennSerializer(serializers.ModelSerializer):

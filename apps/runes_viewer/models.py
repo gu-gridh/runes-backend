@@ -32,6 +32,13 @@ class Area(AbstractTagModel):
         verbose_name_plural = _("Areas")
 
 
+class TypeOfImage(AbstractTagModel):
+
+    class Meta:
+        verbose_name = _("Type of image")
+        verbose_name_plural = _("Types of image")
+
+
 class Place(AbstractPlaceModel):
     parish = models.CharField(max_length=256, blank=True, null=True)
     area = models.ForeignKey(Area, on_delete=models.SET_NULL, blank=True, null=True)

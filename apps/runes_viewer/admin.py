@@ -2,7 +2,15 @@ from django.contrib import admin
 from django.contrib.gis import admin as gis_admin
 from django.forms.models import BaseInlineFormSet
 
-from .models import Area, Place, Position, Runestone, RunestonePosition, TimePeriod
+from .models import (
+    Area,
+    Place,
+    Position,
+    Runestone,
+    RunestonePosition,
+    TimePeriod,
+    TypeOfImage,
+)
 
 
 @admin.register(TimePeriod)
@@ -10,13 +18,21 @@ class TimePeriodAdmin(admin.ModelAdmin):
     list_display = ('text',)
     search_fields = ('text',)
 
+
 @admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
     list_display = ('text',)
     search_fields = ('text',)
 
+
 @admin.register(Area)
 class AreaAdmin(admin.ModelAdmin):
+    list_display = ('text',)
+    search_fields = ('text',)
+
+
+@admin.register(TypeOfImage)
+class TypeOfImageAdmin(admin.ModelAdmin):
     list_display = ('text',)
     search_fields = ('text',)
 
@@ -62,6 +78,7 @@ class PlaceAdmin(gis_admin.GISModelAdmin):
             "default_zoom": 10,
         },
     }
+
 
 @admin.register(Runestone)
 class RunestoneAdmin(gis_admin.GISModelAdmin):
