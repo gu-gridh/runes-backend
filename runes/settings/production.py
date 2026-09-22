@@ -42,3 +42,20 @@ DATABASES = {
 
 IIIF_URL = "https://img.dh.gu.se/runes/static/"
 ORIGINAL_URL  = "https://data.dh.gu.se/runes/upload/"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django.request": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}
