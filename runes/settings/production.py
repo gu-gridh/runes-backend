@@ -39,3 +39,5 @@ DATABASES = {
         'PORT': os.getenv('PORT'),
     }
 }
+
+IIIF_URL = "https://img.dh.gu.se/runes/static/"
