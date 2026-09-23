@@ -121,7 +121,9 @@ WSGI_APPLICATION = 'runes.wsgi.application'
 X_FRAME_OPTIONS = "SAMEORIGIN"
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
-
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED').split(',')
+CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED').split(',')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
