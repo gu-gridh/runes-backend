@@ -109,3 +109,6 @@ class RunestonePosition(models.Model):
                 name="unique_runestone_position",
             )
         ]
+
+    def __str__(self) -> str:
+        return f"{self.runestone.name} Position"

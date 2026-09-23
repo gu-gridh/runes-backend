@@ -75,17 +75,20 @@ class PlaceAdmin(gis_admin.GISModelAdmin):
 
 @admin.register(Runestone)
 class RunestoneAdmin(gis_admin.GISModelAdmin):
-    list_display = ('name', 'time_period__text', 'place__name')
+    list_display = ('name', 'time_period__text', 'place__name',
+                    'display_positions')
     search_fields = ('name', 'place__name')
+    list_filter = ('time_period', 'position')
     inlines = (RunestonePositionInline,)
 
     fieldsets = (
         (None,
-         {"fields": ["name", "description", "time_period", "place", "coordinates"]}),
-        ("External Links",
-         {"fields": ["fornsoek_url", "lantmaeteriet_url"]}),
-        ("Media",
-         {"fields": ["mesh_url_public", "mesh_url_download"]}),
+         {'fields': ['name', 'description', 'time_period', 'place',
+                     'coordinates']}),
+        ('External Links',
+         {'fields': ['fornsoek_url', 'lantmaeteriet_url']}),
+        ('Media',
+         {'fields': ['mesh_url_public', 'mesh_url_download']}),
     )
 
     gis_widget_kwargs = {
@@ -97,3 +100,10 @@ class RunestoneAdmin(gis_admin.GISModelAdmin):
         },
     }
 
+    def display_positions(self, obj):
+        return ", ".join(
+            f"{item.position.text}: {item.get_status_display()}"
+            for item in obj.runestoneposition_set.all()
+        )
+
+    display_positions.short_description = "Positions"
