@@ -29,27 +29,32 @@ class VennViewSet(ViewSet):
 
         data = {
             area.text: {
-                period.text: []
-                for period in periods
+                **{
+                    period.text: {
+                        "venn": [],
+                        "outside": [],
+                    }
+                    for period in periods
+                },
+                "unknown": {
+                    "venn": [],
+                    "outside": [],
+                },
             }
             for area in areas
         }
 
-        no_match = []
-
         for runestone in runestones:
             serialized = VennSerializer(runestone).data
 
+            area = runestone.place.area.text
+            time_period = runestone.time_period.text if runestone.time_period else "unknown"
+
             if not serialized["sets"]:
-                no_match.append({"id": runestone.id,
-                                 "name": runestone.name})
+                data[area][time_period]["outside"].append({"id": runestone.id,
+                                                           "name": runestone.name})
                 continue
 
-            data[
-                runestone.place.area.text
-            ][
-                runestone.time_period.text
-            ].append(serialized)
+            data[area][time_period]["venn"].append(serialized)
 
-        return Response({"venn": data,
-                         "no_match": no_match})
+        return Response(data)
