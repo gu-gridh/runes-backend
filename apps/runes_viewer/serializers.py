@@ -3,7 +3,7 @@ from gridh_abstract.serializers import DynamicDepthSerializer
 from rest_framework_gis.serializers import GeoModelSerializer
 from rest_framework import serializers
 
-from .models import Position, Runestone, RunestonePosition, TimePeriod
+from .models import Position, Runestone, RunestonePosition, TimePeriod, Place
 
 
 class TimePeriodSerializer(serializers.ModelSerializer):
@@ -26,6 +26,12 @@ class RunestonePositionSerializer(serializers.ModelSerializer):
         fields = ["position", "status"]
 
 
+class PlaceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Place
+        fields = "__all__"
+
+
 class RunestoneSerializer(DynamicDepthSerializer):
     time_period = TimePeriodSerializer()
     positions = RunestonePositionSerializer(
@@ -33,6 +39,7 @@ class RunestoneSerializer(DynamicDepthSerializer):
         many=True,
         read_only=True,
     )
+    place = PlaceSerializer()
     longitude = serializers.SerializerMethodField()
     latitude = serializers.SerializerMethodField()
 
