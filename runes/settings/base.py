@@ -203,3 +203,8 @@ PREVIEW_PATH = "runes/previewimages"
 
 # place model in digicure
 DIGICURE_PLACE_MODEL = "runes_viewer.Runestone"
+
+# image processor access
+IMAGE_PROCESSOR_URL = os.getenv("IMAGE_PROCESSOR_URL")
+IMAGE_PROCESSOR_TOKEN = os.getenv("IMAGE_PROCESSOR_TOKEN")
+IMAGE_PROCESSOR_ENABLED = os.getenv("IMAGE_PROCESSOR_ENABLED")
