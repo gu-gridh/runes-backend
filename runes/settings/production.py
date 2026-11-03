@@ -36,9 +36,6 @@ DATABASES = {
     }
 }
 
-IIIF_URL = "https://img.dh.gu.se/runes/upload/"
-ORIGINAL_URL  = "/media/"
-
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,

@@ -22,35 +22,21 @@ PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, os.path.dirname(PROJECT_DIR))
 
+
 def read_json(path: str, encoding='utf-8', **kwargs):
     """Read JSON file and return parsed content"""
     with open(path, 'r', encoding=encoding) as f:
         return json.load(f, **kwargs)
-    
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+
 
 # Load environment variables from .env file if it exists
 load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key-change-in-production')
-
-
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1",
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-]   
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-]
 
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
 
@@ -173,6 +159,9 @@ MEDIA_URL = os.getenv("MEDIA_URL", "/media/")
 STATIC_ROOT = os.getenv("STATIC_ROOT", os.path.join(BASE_DIR, "static"))
 STATIC_URL = os.getenv("STATIC_URL", "/static/")
 
+IIIF_URL = os.getenv("IIIF_URL")
+ORIGINAL_URL = os.getenv("ORIGINAL_URL", "/media/")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -208,3 +197,4 @@ DIGICURE_PLACE_MODEL = "runes_viewer.Runestone"
 IMAGE_PROCESSOR_URL = os.getenv("IMAGE_PROCESSOR_URL")
 IMAGE_PROCESSOR_TOKEN = os.getenv("IMAGE_PROCESSOR_TOKEN")
 IMAGE_PROCESSOR_ENABLED = os.getenv("IMAGE_PROCESSOR_ENABLED")
+PANORAMA_PUBLIC_BASE_URL = os.getenv("PANORAMA_PUBLIC_BASE_URL")
